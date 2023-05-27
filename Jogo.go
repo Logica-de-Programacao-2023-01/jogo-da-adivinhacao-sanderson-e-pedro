@@ -6,11 +6,16 @@ import (
 	"time"
 )
 
+func addy(y *[]int, tentativas int) {
+	*y = append(*y, tentativas)
+}
+
 func main() {
 	rand.Seed(time.Now().Unix())
 	var tentativas int
 	numero := rand.Intn(100) + 1
 	y := []int{}
+
 	for {
 		var num int
 		fmt.Println("Digite um número de 1 a 100: ")
@@ -22,11 +27,11 @@ func main() {
 		} else {
 			fmt.Println("Você acertou!!")
 			fmt.Println("Tentativas: ", tentativas)
-			y = append(y, tentativas)
+			addy(&y, tentativas)
 			break
 			//Professor se tentativas não incluir o acerto, está certo, se não, só colocar tentativa + 1
 		}
-		tentativas += 1
+		tentativas++
 	}
 
 	var novamente string
@@ -35,10 +40,9 @@ func main() {
 
 	if novamente != "s" && novamente != "S" {
 		fmt.Println("RESUMO:")
-		for s := range y {
-			for i := 0; i <= len(y); i++ {
-				fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i+1, y[s])
-			}
+		for i, s := range y {
+			fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i+1, s)
+			i++
 		}
 	} else {
 		main()

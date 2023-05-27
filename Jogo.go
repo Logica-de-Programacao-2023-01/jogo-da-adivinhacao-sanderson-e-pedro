@@ -35,8 +35,10 @@ func main() {
 
 	if novamente != "s" && novamente != "S" {
 		fmt.Println("RESUMO:")
-		for i := 0; i <= len(y); i++ {
-			fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i+1, y[i])
+		for s := range y {
+			for i := 0; i <= len(y); i++ {
+				fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i+1, y[s])
+			}
 		}
 	} else {
 		main()

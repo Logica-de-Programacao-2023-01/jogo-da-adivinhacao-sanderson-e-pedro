@@ -9,7 +9,8 @@ import (
 func main() {
 	rand.Seed(time.Now().Unix())
 	var tentativas, rodada int
-	jogadas := make([][2]int, rodada)
+	jogadas := []int{}
+	rodadas := []int{}
 	numero := rand.Intn(100) + 1
 	for {
 		var num int
@@ -28,19 +29,21 @@ func main() {
 		tentativas++
 	}
 	rodada++
-
+	jogadas = append(jogadas, tentativas)
+	rodadas = append(rodadas, rodada)
 	fmt.Print("Deseja jogar novamente? (n/N = Não || s/S = Sim): ")
 	var novamente string
 	fmt.Scanln(&novamente)
-	for {
-		novamatrix := make([][3]int, rodada)
-		if novamente != "s" && novamente != "S" {
-			novamatrix[rodada][1] = rodada
-			novamatrix[rodada][2] = tentativas
-			fmt.Println(novamatrix)
-			fmt.Println(jogadas)
-		} else {
-			main()
+	if novamente != "s" && novamente != "S" {
+		fmt.Println("Resumo: ")
+		for y := range jogadas {
+			fmt.Printf("TENTATIVA: %d ", y)
+			for x := range jogadas {
+				fmt.Printf("RODADA: %d", x)
+			}
 		}
+	} else {
+		main()
 	}
+
 }

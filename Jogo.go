@@ -8,10 +8,9 @@ import (
 
 func main() {
 	rand.Seed(time.Now().Unix())
-	var tentativas, rodada int
-	jogadas := []int{}
-	rodadas := []int{}
+	var tentativas int
 	numero := rand.Intn(100) + 1
+	y := []int{}
 	for {
 		var num int
 		fmt.Println("Digite um número de 1 a 100: ")
@@ -23,24 +22,21 @@ func main() {
 		} else {
 			fmt.Println("Você acertou!!")
 			fmt.Println("Tentativas: ", tentativas)
+			y = append(y, tentativas)
 			break
 			//Professor se tentativas não incluir o acerto, está certo, se não, só colocar tentativa + 1
 		}
-		tentativas++
+		tentativas += 1
 	}
-	rodada++
-	jogadas = append(jogadas, tentativas)
-	rodadas = append(rodadas, rodada)
-	fmt.Print("Deseja jogar novamente? (n/N = Não || s/S = Sim): ")
+
 	var novamente string
+	fmt.Print("Deseja jogar novamente? (n/N = Não || s/S = Sim): ")
 	fmt.Scanln(&novamente)
+
 	if novamente != "s" && novamente != "S" {
-		fmt.Println("Resumo: ")
-		for y := range jogadas {
-			fmt.Printf("TENTATIVA: %d ", y)
-			for x := range jogadas {
-				fmt.Printf("RODADA: %d", x)
-			}
+		fmt.Println("RESUMO:")
+		for i := 0; i <= len(y); i++ {
+			fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i+1, y[i])
 		}
 	} else {
 		main()

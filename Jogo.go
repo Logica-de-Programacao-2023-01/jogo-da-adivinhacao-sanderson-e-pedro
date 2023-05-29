@@ -7,43 +7,44 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().Unix())
-	var tentativas int = 0
-	var rodada int
-	numero := rand.Intn(10) + 1
-	y := make([]int, 0)
+	rand.Seed(time.Now().UnixNano())
+	var x [][]int
 	for {
+		var tentativas int = 1
+		y := []int{}
+		numero := rand.Intn(100) + 1
 
-		var num int
-		fmt.Println("Digite um número de 1 a 100: ")
-		fmt.Scanln(&num)
-		tentativas++
-		if num < numero {
-			fmt.Println("O número certo é maior")
-		} else if num > numero {
-			fmt.Println("O número certo é menor")
-		} else {
-			fmt.Println("Você acertou!!")
-			fmt.Println("Tentativas: ", tentativas)
-			y = append(y, tentativas)
-			break
-			//Professor se tentativas não incluir o acerto, está certo, se não, só colocar tentativa + 1
+		for i := 1; i < 101; i++ {
+			var num int
+			fmt.Println("Digite um número de 1 a 100: ")
+			fmt.Scanf("%d\n", &num)
+			y = append(y, num)
+
+			if num < numero {
+				fmt.Println("O número certo é maior")
+				tentativas++
+			} else if num > numero {
+				fmt.Println("O número certo é menor")
+				tentativas++
+			} else {
+				fmt.Println("Você acertou!!")
+				x = append(x, y)
+				fmt.Println("Tentativas: ", tentativas)
+
+				var novamente string
+				fmt.Print("Deseja jogar novamente? (n/N = Não || s/S = Sim): ")
+				fmt.Scanf("%s\n", &novamente)
+
+				if novamente == "s" || novamente == "S" {
+					break
+				} else {
+					fmt.Println("RESUMO:")
+					for j, x2 := range x {
+						fmt.Printf("JOGADA: %d | TENTIVAS: %d \n", j+1, len(x2))
+					}
+					return
+				}
+			}
 		}
 	}
-	rodada++
-
-	var novamente string
-	fmt.Print("Deseja jogar novamente? (n/N = Não || s/S = Sim): ")
-	fmt.Scanln(&novamente)
-	if novamente != "s" && novamente != "S" {
-		fmt.Println("RESUMO:")
-	} else {
-		main()
-	}
-
-	for i, s := range y {
-		fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i, s)
-		i++
-	}
-
 }

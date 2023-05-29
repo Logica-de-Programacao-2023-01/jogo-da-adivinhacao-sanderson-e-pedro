@@ -10,10 +10,10 @@ func main() {
 	rand.Seed(time.Now().Unix())
 	var tentativas int = 0
 	var rodada int
-	numero := rand.Intn(100) + 1
-	y := make([]int, rodada)
-
+	numero := rand.Intn(10) + 1
+	y := make([]int, 0)
 	for {
+
 		var num int
 		fmt.Println("Digite um número de 1 a 100: ")
 		fmt.Scanln(&num)
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	for i, s := range y {
-		fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i+1, s)
+		fmt.Printf("JOGADA: %d | TENTIVAS: %d\f", i, s)
 		i++
 	}
 
